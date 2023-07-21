@@ -1,12 +1,19 @@
 class Student{
+  late int id;
   late String firstName;
   late String lastName;
   late int grade;
   late String _status;
-  Student(String firstName,String lastName,int grade){
+  Student.withId(int id, String firstName, String lastName, int grade){
+    this.id=id;
     this.firstName=firstName;
     this.lastName=lastName;
     this.grade=grade;
+  }
+  Student( String firstName, String lastName, int grade) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.grade = grade;
   }
   String get getFirstname{
     return "OGR -"+ this.firstName;
