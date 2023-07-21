@@ -13,20 +13,14 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   String mesaj = "Öğrenci Takip Sistemi";
 
-  String seciliOgrenci = "abc";
+  Student selectedStudent=Student.withId(0,"","",0);
 
   List<Student> students = [
-    new Student("İsmail", "Olguner", 20),
-    Student("Alim", "Ulaş", 80),
-    Student("Halil", "Duymaz", 45)
+    Student.withId(1,"İsmail", "Olguner", 20),
+    Student.withId(2,"Alim", "Ulaş", 80),
+    Student.withId(3,"Halil", "Duymaz", 45)
   ];
 
-  var ogrenciler = [
-    "İsmail Olguner",
-    "Alim Ulaş",
-    "Berkay Bilgin",
-    "Murat Kurt"
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -38,21 +32,11 @@ class _MyAppState extends State<MyApp> {
     );
   }
 
-  String sinavHesapla(int puan) {
-    String mesaj = "";
-    if (puan >= 50) {
-      mesaj = "Geçti";
-    } else if (puan >= 40) {
-      mesaj = "Bütünlemeye Kaldı";
-    } else {
-      mesaj = "Kaldı";
-    }
-    return mesaj;
-  }
+
 
   void mesajGoster(BuildContext context, String mesaj) {
     var alert = AlertDialog(
-      title: Text("Sınav Sonucu"),
+      title: Text("İşlem Sonucu"),
       content: Text(mesaj),
     );
 
@@ -82,16 +66,14 @@ class _MyAppState extends State<MyApp> {
                     trailing: buildStatusIcon(students[index].grade),
                     onTap: () {
                       setState(() {
-                        seciliOgrenci = students[index].firstName +
-                            " " +
-                            students[index].lastName;
+                        selectedStudent = students[index];
                       });
 
-                      print(seciliOgrenci);
+                      print(selectedStudent);
                     },
                   );
                 })),
-        Text("Seçili Öğrenci : " + seciliOgrenci),
+        Text("Seçili Öğrenci : " + selectedStudent.firstName),
         Row(
           children: <Widget>[
             Flexible(
@@ -111,7 +93,7 @@ class _MyAppState extends State<MyApp> {
                   ],
                 ),
                 onPressed: () {
-                  var mesaj = sinavHesapla(35);
+                  var mesaj = "Eklendi";
                   mesajGoster(context, mesaj);
                 },
               ),
@@ -133,7 +115,7 @@ class _MyAppState extends State<MyApp> {
                   ],
                 ),
                 onPressed: () {
-                  var mesaj = sinavHesapla(35);
+                  var mesaj = "Güncellendi";
                   mesajGoster(context, mesaj);
                 },
               ),
@@ -155,7 +137,11 @@ class _MyAppState extends State<MyApp> {
                   ],
                 ),
                 onPressed: () {
-                  var mesaj = sinavHesapla(35);
+                  setState(() {
+                    students.remove(selectedStudent);
+                  });
+
+                  var mesaj = "Silindi : "+selectedStudent.firstName;
                   mesajGoster(context, mesaj);
                 },
               ),
