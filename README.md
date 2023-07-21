@@ -1,4 +1,4 @@
-# kurs
+# flutter dersleri
 
 A new Flutter project.
 
