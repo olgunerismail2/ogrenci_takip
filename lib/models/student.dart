@@ -15,6 +15,9 @@ class Student{
     this.lastName = lastName;
     this.grade = grade;
   }
+  Student.withoutInfo(){
+
+  }
   String get getFirstname{
     return "OGR -"+ this.firstName;
   }
@@ -33,4 +36,6 @@ class Student{
     }
     return message;
   }
+
+  void add(List<Student> students) {}
 }
